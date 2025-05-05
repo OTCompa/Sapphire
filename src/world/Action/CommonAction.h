@@ -12,7 +12,9 @@ namespace Sapphire::World::Action
     Maim = 37,
     StormsPath = 42,
     StormsEye = 45,
-    ButchersBlock = 47
+    ButchersBlock = 47,
+
+    IronJaws = 3560
   };
 
   enum ActionStatus
