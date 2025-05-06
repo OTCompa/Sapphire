@@ -33,6 +33,7 @@
 #include "WorldServer.h"
 
 #include "Job/Warrior.h"
+#include "Job/Bard.h"
 
 using namespace Sapphire;
 using namespace Sapphire::Common;
@@ -239,6 +240,10 @@ bool Action::Action::isWeaponskill() const
 Entity::CharaPtr Action::Action::getSourceChara() const
 {
   return m_pSource;
+}
+
+Entity::CharaPtr Action::Action::getTargetChara() const {
+  return m_pTarget;
 }
 
 bool Action::Action::update()
@@ -649,6 +654,11 @@ void Action::Action::handleJobAction()
     case ClassJob::Warrior:
     {
       Warrior::onAction( *m_pSource->getAsPlayer(), *this );
+      break;
+    }
+    case ClassJob::Bard:
+    {
+      Bard::onAction( *m_pSource->getAsPlayer(), *this );
       break;
     }
   }

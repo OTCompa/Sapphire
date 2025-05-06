@@ -33,6 +33,7 @@ namespace Sapphire::World::Action
     void setTargetId( uint64_t targetId );
     uint64_t getTargetId() const;
     Entity::CharaPtr getSourceChara() const;
+    Entity::CharaPtr getTargetChara() const;
 
     bool isInterrupted() const;
     Common::ActionInterruptType getInterruptType() const;

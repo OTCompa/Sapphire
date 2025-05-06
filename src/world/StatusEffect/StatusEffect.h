@@ -46,6 +46,8 @@ public:
 
   uint64_t getStartTimeMs() const;
 
+  void resetStartTimeMs();
+
   uint16_t getParam() const;
 
   uint32_t getFlag() const;

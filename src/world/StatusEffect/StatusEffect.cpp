@@ -198,6 +198,11 @@ uint64_t Sapphire::StatusEffect::StatusEffect::getStartTimeMs() const
   return m_startTime;
 }
 
+void Sapphire::StatusEffect::StatusEffect::resetStartTimeMs() {
+  m_startTime = Util::getTimeMs();
+}
+
+
 uint32_t Sapphire::StatusEffect::StatusEffect::getFlag() const
 {
   return m_flag;
