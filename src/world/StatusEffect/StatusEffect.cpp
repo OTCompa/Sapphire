@@ -28,6 +28,8 @@ Sapphire::StatusEffect::StatusEffect::StatusEffect( uint32_t id, Entity::CharaPt
 {
   m_statusModifiers = modifiers;
   m_flag = flag;
+  m_critProbability = 0.05;
+  m_critBonus = 1.4;
 }
 
 Sapphire::StatusEffect::StatusEffect::StatusEffect( uint32_t id, Entity::CharaPtr sourceActor, Entity::CharaPtr targetActor,
@@ -71,6 +73,9 @@ Sapphire::StatusEffect::StatusEffect::StatusEffect( uint32_t id, Entity::CharaPt
     m_flag |= static_cast< uint32_t >( Common::StatusEffectFlag::IsGaze );
   if( entry->data().FcAction )
     m_flag |= static_cast< uint32_t >( Common::StatusEffectFlag::FcBuff );
+
+  m_critProbability = 0.05;
+  m_critBonus = 1.4;
 }
 
 
@@ -241,4 +246,24 @@ uint8_t Sapphire::StatusEffect::StatusEffect::getSlot() const
 void Sapphire::StatusEffect::StatusEffect::setSlot( uint8_t slot )
 {
   m_slot = slot;
+}
+
+float Sapphire::StatusEffect::StatusEffect::getCritProbability()
+{
+  return m_critProbability;
+}
+
+void Sapphire::StatusEffect::StatusEffect::setCritProbability( float critProbability )
+{
+  m_critProbability = critProbability;
+}
+
+float Sapphire::StatusEffect::StatusEffect::getCritBonus()
+{
+  return m_critBonus;
+}
+
+void Sapphire::StatusEffect::StatusEffect::setCritBonus( float critBonus)
+{
+  m_critBonus = critBonus;
 }

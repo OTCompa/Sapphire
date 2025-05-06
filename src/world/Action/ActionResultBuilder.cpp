@@ -19,6 +19,7 @@
 
 #include <Manager/TaskMgr.h>
 #include <Task/ActionIntegrityTask.h>
+#include <Math/CalcStats.h>
 
 using namespace Sapphire;
 using namespace Sapphire::World::Action;
@@ -97,7 +98,9 @@ void ActionResultBuilder::applyStatusEffect( Entity::CharaPtr& target, uint16_t 
                                              const std::vector< World::Action::StatusModifier >& modifiers, uint32_t flag, bool shouldOverride )
 {
   ActionResultPtr nextResult = make_ActionResult( target );
-  nextResult->applyStatusEffect( statusId, duration, *m_sourceChara, param, modifiers, flag, shouldOverride );
+  auto critProbability = Math::CalcStats::criticalHitProbability( *m_sourceChara );
+  auto critBonus = Math::CalcStats::criticalHitBonus( *m_sourceChara );
+  nextResult->applyStatusEffect( statusId, duration, *m_sourceChara, param, modifiers, flag, shouldOverride, critProbability, critBonus );
   addResultToActor( target, nextResult );
 }
 

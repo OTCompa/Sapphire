@@ -38,6 +38,7 @@ public:
   uint32_t getTickRate() const;
 
   uint32_t getSrcActorId() const;
+
   Entity::CharaPtr getSrcActor() const;
 
   uint32_t getTargetActorId() const;
@@ -67,7 +68,18 @@ public:
   const std::string& getName() const;
 
   uint8_t getSlot() const;
+
   void setSlot( uint8_t slot );
+
+  void setCritStats( Entity::CharaPtr sourceActor );
+
+  float getCritProbability();
+
+  void setCritProbability( float critProbability );
+
+  float getCritBonus();
+
+  void setCritBonus( float critBonus );
 
 private:
   uint32_t m_id;
@@ -84,7 +96,8 @@ private:
   std::vector< World::Action::StatusModifier > m_statusModifiers;
   std::unordered_map< Common::ParamModifier, int32_t > m_modifiers;
   uint8_t m_slot;
-
+  float m_critProbability;
+  float m_critBonus;
 };
 
 }

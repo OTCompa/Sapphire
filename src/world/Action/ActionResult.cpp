@@ -78,7 +78,7 @@ void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Cha
 }
 
 void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Chara& source, uint8_t param,
-                                      const std::vector< StatusModifier >& modifiers, uint32_t flag, bool shouldOverride )
+                                      const std::vector< StatusModifier >& modifiers, uint32_t flag, bool shouldOverride, float critProbability, float critBonus )
 {
   m_result.Value = static_cast< int16_t >( id );
   m_result.Arg2 = param;
@@ -86,7 +86,10 @@ void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Cha
 
   m_bOverrideStatus = shouldOverride;
   m_pStatus = Sapphire::StatusEffect::make_StatusEffect( id, source.getAsChara(), m_target, duration, modifiers, flag, 3000 );
+
   m_pStatus->setParam( param );
+  m_pStatus->setCritProbability( critProbability );
+  m_pStatus->setCritBonus( critBonus );
 }
 
 void ActionResult::applyStatusEffectSelf( uint32_t id, int32_t duration, uint8_t param, bool shouldOverride )

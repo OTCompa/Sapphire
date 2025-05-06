@@ -636,6 +636,30 @@ std::pair< float, Sapphire::Common::CalcResultType > CalcStats::calcActionDamage
   return std::pair( factor, hitType );
 }
 
+float Sapphire::Math::CalcStats::calcTickInfo( const Sapphire::Entity::Chara& chara, uint32_t ptc, float wepDmg )
+{
+  auto pot = potency( static_cast< uint16_t >( ptc ) );
+  auto wd = weaponDamage( chara, wepDmg );
+  auto ap = getPrimaryAttackPower( chara );
+  auto det = determination( chara );
+  auto damageDealtMod = chara.getModifier( Common::ParamModifier::DamageDealtPercent );
+
+  auto factor = Common::Util::trunc( pot * wd * ap * det, 0 );
+  Sapphire::Common::CalcResultType hitType = Sapphire::Common::CalcResultType::TypeDamageHp;
+
+  return factor;
+}
+
+uint32_t Sapphire::Math::CalcStats::calcRandomizedDamage( uint32_t damage, float critProbability, float critBonus )
+{
+  if (critProbability > getRandomNumber0To100()) {
+    damage *= critBonus;
+  }
+
+  return damage * ( 1.0f + ( ( getRandomNumber0To100() - 50.0f ) / 1000.0f ));
+}
+
+
 std::pair< float, Sapphire::Common::CalcResultType > CalcStats::calcActionHealing( const Sapphire::Entity::Chara& chara, uint32_t ptc, float wepDmg )
 {
   // lol just for testing

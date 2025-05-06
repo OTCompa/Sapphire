@@ -26,6 +26,7 @@
 #include "Manager/MgrUtil.h"
 #include "Manager/PlayerMgr.h"
 #include "Common.h"
+#include <Math/CalcStats.h>
 
 using namespace Sapphire;
 using namespace Sapphire::Common;
@@ -850,7 +851,7 @@ void Chara::onTick()
     {
       case Common::ParamModifier::TickDamage:
       {
-        thisTickDmg += thisEffect.second;
+        thisTickDmg += Math::CalcStats::calcRandomizedDamage( thisEffect.second, effectIt.second->getCritProbability(), effectIt.second->getCritBonus() );
         break;
       }
 
