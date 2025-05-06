@@ -638,7 +638,16 @@ void Action::Action::handleStatusEffects()
     {
       for( auto& status : m_lutEntry.statuses.target )
       {
-        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( status.modifiers ), status.flag, true );
+        auto modifiers = status.modifiers;
+        for( auto& mod : modifiers )
+        {
+          std::string format = "modifier {}: {}";
+          if( mod.modifier == Common::ParamModifier::TickDamage )
+            mod.value = calcDamage( mod.value ).first;
+          else if( mod.modifier == Common::ParamModifier::TickHeal )
+            mod.value = calcHealing( mod.value ).first;
+        }
+        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( modifiers ), status.flag, true );
       }
 
       if( !actor->getStatusEffectMap().empty() )
