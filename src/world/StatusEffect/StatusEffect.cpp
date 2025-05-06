@@ -203,7 +203,7 @@ uint64_t Sapphire::StatusEffect::StatusEffect::getStartTimeMs() const
   return m_startTime;
 }
 
-void Sapphire::StatusEffect::StatusEffect::resetStartTimeMs() {
+void Sapphire::StatusEffect::StatusEffect::resetStartTime() {
   m_startTime = Util::getTimeMs();
 }
 
@@ -266,4 +266,13 @@ float Sapphire::StatusEffect::StatusEffect::getCritBonus()
 void Sapphire::StatusEffect::StatusEffect::setCritBonus( float critBonus)
 {
   m_critBonus = critBonus;
+}
+
+float Sapphire::StatusEffect::StatusEffect::getBaseTickValue()
+{
+  return m_baseTickValue;
+}
+
+void Sapphire::StatusEffect::StatusEffect::setBaseTickValue(float baseTickValue) {
+  m_baseTickValue = baseTickValue;
 }

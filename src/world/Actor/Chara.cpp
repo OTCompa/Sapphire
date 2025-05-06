@@ -851,7 +851,7 @@ void Chara::onTick()
     {
       case Common::ParamModifier::TickDamage:
       {
-        thisTickDmg += Math::CalcStats::calcRandomizedDamage( thisEffect.second, effectIt.second->getCritProbability(), effectIt.second->getCritBonus() );
+        thisTickDmg += Math::CalcStats::calcRandomizedDamage( effectIt.second->getBaseTickValue(), effectIt.second->getCritProbability(), effectIt.second->getCritBonus() );
         break;
       }
 

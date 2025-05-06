@@ -142,7 +142,7 @@ namespace Sapphire::Math
 
     static float calcTickInfo( const Sapphire::Entity::Chara& chara, uint32_t ptc, float wepDmg );
 
-    static uint32_t calcRandomizedDamage( uint32_t damage, float critProbability, float critBonus );
+    static uint32_t calcRandomizedDamage( float damage, float critProbability, float critBonus );
 
     static std::pair< float, Common::CalcResultType > calcActionHealing( const Sapphire::Entity::Chara& chara, uint32_t ptc, float wepDmg );
 

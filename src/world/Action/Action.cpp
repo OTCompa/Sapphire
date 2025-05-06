@@ -35,6 +35,9 @@
 #include "Job/Warrior.h"
 #include "Job/Bard.h"
 
+#include "Forwards.h"
+#include <StatusEffect/StatusEffect.h>
+
 using namespace Sapphire;
 using namespace Sapphire::Common;
 using namespace Sapphire::Network;
@@ -486,6 +489,44 @@ std::pair< uint32_t, Common::CalcResultType > Action::Action::calcDamage( uint32
   return Math::CalcStats::calcActionDamage( *m_pSource, potency, wepDmg );
 }
 
+float Action::Action::calcTickDamage( uint32_t potency )
+{
+  auto wepDmg = 1.f;
+
+  if( auto player = m_pSource->getAsPlayer() )
+  {
+    auto item = player->getEquippedWeapon();
+    assert( item );
+
+    auto role = player->getRole();
+    if( role == Common::Role::RangedMagical || role == Common::Role::Healer )
+      wepDmg = item->getMagicalDmg();
+    else
+      wepDmg = item->getPhysicalDmg();
+  }
+
+  return Math::CalcStats::calcTickInfo( *m_pSource, potency, wepDmg );
+}
+
+
+void Action::Action::resnapshotStatusEffect( Sapphire::StatusEffect::StatusEffectPtr status )
+{
+  Logger::debug( "huh" );
+  auto tickEffect = status->getTickEffect();
+  if (tickEffect.first == ParamModifier::TickDamage) {
+    status->setBaseTickValue( calcTickDamage( tickEffect.second ) );
+  }
+  else if( tickEffect.first == ParamModifier::TickHeal )
+  {
+    //status->setBaseTickValue(  );
+  }
+
+  auto critProbability = Math::CalcStats::criticalHitProbability( *m_pSource );
+  status->setCritProbability( critProbability );
+  auto critBonus = Math::CalcStats::criticalHitBonus( *m_pSource );
+  status->setCritBonus( critBonus );
+}
+
 std::pair< uint32_t, Common::CalcResultType > Action::Action::calcHealing( uint32_t potency )
 {
   auto wepDmg = 1.f;
@@ -638,16 +679,20 @@ void Action::Action::handleStatusEffects()
     {
       for( auto& status : m_lutEntry.statuses.target )
       {
+        float baseTickDamage = -1;
+
         auto modifiers = status.modifiers;
         for( auto& mod : modifiers )
         {
           std::string format = "modifier {}: {}";
-          if( mod.modifier == Common::ParamModifier::TickDamage )
-            mod.value = calcDamage( mod.value ).first;
+          if (mod.modifier == Common::ParamModifier::TickDamage) {
+            baseTickDamage = calcTickDamage( mod.value );
+          }
           else if( mod.modifier == Common::ParamModifier::TickHeal )
             mod.value = calcHealing( mod.value ).first;
         }
-        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( modifiers ), status.flag, true );
+
+        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( modifiers ), status.flag, true, baseTickDamage);
       }
 
       if( !actor->getStatusEffectMap().empty() )

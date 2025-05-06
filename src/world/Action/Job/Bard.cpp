@@ -6,6 +6,7 @@
 #include <Util/Util.h>
 #include <StatusEffect/StatusEffect.h>
 #include <Logging/Logger.h>
+#include <Math/CalcStats.h>
 
 using namespace Sapphire;
 using namespace Sapphire::Common;
@@ -45,8 +46,9 @@ void Bard::handleIronJaws( Entity::Player& player, Action& action )
     if (status->getId() == VenomousBite) {
       if( statusSrc == playerAsChara )
       {
-        status->resetStartTimeMs();
-        targetAsChara->updateStatusEffect( status );
+        status->resetStartTime();
+        action.resnapshotStatusEffect( status );
+        targetAsChara->updateStatusEffect(status);
       }
     }
 
@@ -54,7 +56,8 @@ void Bard::handleIronJaws( Entity::Player& player, Action& action )
     {
       if( statusSrc == playerAsChara )
       {
-        status->resetStartTimeMs();
+        status->resetStartTime();
+        action.resnapshotStatusEffect( status );
         targetAsChara->updateStatusEffect( status );
       }
     }

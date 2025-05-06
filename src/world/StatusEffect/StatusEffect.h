@@ -47,7 +47,7 @@ public:
 
   uint64_t getStartTimeMs() const;
 
-  void resetStartTimeMs();
+  void resetStartTime();
 
   uint16_t getParam() const;
 
@@ -81,6 +81,10 @@ public:
 
   void setCritBonus( float critBonus );
 
+  float getBaseTickValue();
+
+  void setBaseTickValue( float baseTickValue );
+
 private:
   uint32_t m_id;
   Entity::CharaPtr m_sourceActor;
@@ -98,6 +102,7 @@ private:
   uint8_t m_slot;
   float m_critProbability;
   float m_critBonus;
+  float m_baseTickValue;
 };
 
 }

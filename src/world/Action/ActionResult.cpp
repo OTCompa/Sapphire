@@ -78,7 +78,7 @@ void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Cha
 }
 
 void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Chara& source, uint8_t param,
-                                      const std::vector< StatusModifier >& modifiers, uint32_t flag, bool shouldOverride, float critProbability, float critBonus )
+                                      const std::vector< StatusModifier >& modifiers, uint32_t flag, bool shouldOverride, float critProbability, float critBonus, float baseTickValue )
 {
   m_result.Value = static_cast< int16_t >( id );
   m_result.Arg2 = param;
@@ -90,6 +90,7 @@ void ActionResult::applyStatusEffect( uint32_t id, int32_t duration, Entity::Cha
   m_pStatus->setParam( param );
   m_pStatus->setCritProbability( critProbability );
   m_pStatus->setCritBonus( critBonus );
+  m_pStatus->setBaseTickValue( baseTickValue );
 }
 
 void ActionResult::applyStatusEffectSelf( uint32_t id, int32_t duration, uint8_t param, bool shouldOverride )

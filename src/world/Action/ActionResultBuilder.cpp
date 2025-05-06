@@ -95,12 +95,12 @@ void ActionResultBuilder::applyStatusEffect( Entity::CharaPtr& target, uint16_t 
 }
 
 void ActionResultBuilder::applyStatusEffect( Entity::CharaPtr& target, uint16_t statusId, uint32_t duration, uint8_t param,
-                                             const std::vector< World::Action::StatusModifier >& modifiers, uint32_t flag, bool shouldOverride )
+                                             const std::vector< World::Action::StatusModifier >& modifiers, uint32_t flag, bool shouldOverride, float baseTickValue )
 {
   ActionResultPtr nextResult = make_ActionResult( target );
   auto critProbability = Math::CalcStats::criticalHitProbability( *m_sourceChara );
   auto critBonus = Math::CalcStats::criticalHitBonus( *m_sourceChara );
-  nextResult->applyStatusEffect( statusId, duration, *m_sourceChara, param, modifiers, flag, shouldOverride, critProbability, critBonus );
+  nextResult->applyStatusEffect( statusId, duration, *m_sourceChara, param, modifiers, flag, shouldOverride, critProbability, critBonus, baseTickValue );
   addResultToActor( target, nextResult );
 }
 

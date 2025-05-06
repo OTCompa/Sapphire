@@ -645,18 +645,19 @@ float Sapphire::Math::CalcStats::calcTickInfo( const Sapphire::Entity::Chara& ch
   auto damageDealtMod = chara.getModifier( Common::ParamModifier::DamageDealtPercent );
 
   auto factor = Common::Util::trunc( pot * wd * ap * det, 0 );
+  factor *= damageDealtMod;
   Sapphire::Common::CalcResultType hitType = Sapphire::Common::CalcResultType::TypeDamageHp;
 
   return factor;
 }
 
-uint32_t Sapphire::Math::CalcStats::calcRandomizedDamage( uint32_t damage, float critProbability, float critBonus )
+uint32_t Sapphire::Math::CalcStats::calcRandomizedDamage( float baseDamage, float critProbability, float critBonus )
 {
   if (critProbability > getRandomNumber0To100()) {
-    damage *= critBonus;
+    baseDamage *= critBonus;
   }
 
-  return damage * ( 1.0f + ( ( getRandomNumber0To100() - 50.0f ) / 1000.0f ));
+  return baseDamage * ( 1.0f + ( ( getRandomNumber0To100() - 50.0f ) / 1000.0f ));
 }
 
 

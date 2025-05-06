@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Common.h>
+#include "Forwards.h"
 #include "ActionLut.h"
 #include "Util/ActorFilter.h"
 #include "ForwardsZone.h"
@@ -130,6 +131,10 @@ namespace Sapphire::World::Action
     void addDefaultActorFilters();
 
     std::pair< uint32_t, Common::CalcResultType > calcDamage( uint32_t potency );
+
+    float calcTickDamage( uint32_t potency );
+
+    void resnapshotStatusEffect( Sapphire::StatusEffect::StatusEffectPtr status );
 
     std::pair< uint32_t, Common::CalcResultType > calcHealing( uint32_t potency );
 
