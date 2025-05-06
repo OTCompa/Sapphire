@@ -16,5 +16,6 @@ namespace Sapphire::World::Action
 
   private:
     static void handleIronJaws( Entity::Player& player, Action& action );
+    static void handleBarrage( Entity::Player& player, Action& action );
   };
 }// namespace Sapphire::World::Action

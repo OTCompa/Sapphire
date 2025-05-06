@@ -14,53 +14,34 @@ using namespace Sapphire::World::Action;
 
 void Bard::onAction( Entity::Player& player, Action& action )
 {
-  switch( action.getId() )
-  {
-    case IronJaws:
+    switch (action.getId())
     {
-      handleIronJaws( player, action );
-      break;
+      case HeavyShot:
+      case StraightShot:
+      case VenomousBite:
+      case Windbite:
+      case EmpyrealArrow:
+      case IronJaws:
+        handleBarrage( player, action );
     }
-  }
 }
 
-void Bard::handleIronJaws( Entity::Player& player, Action& action )
-{
-  auto playerAsChara = player.getAsChara();
-  auto targetAsChara = action.getHitChara();
-  auto pActionBuilder = action.getActionResultBuilder();
 
-  auto applyVenom = false;
-  auto applyWind = false;
+void Bard::handleBarrage(Entity::Player& player, Action& action) {
+  if( !player.hasStatusEffect( 128 ) ) return;
+
+  
+  auto pActionBuilder = action.getActionResultBuilder();
+  auto targetAsChara = action.getHitChara();
 
   if( !pActionBuilder ) return;
-  if (targetAsChara == nullptr) return;
+  if( targetAsChara == nullptr ) return;
 
-  auto statusEffectMap = targetAsChara->getStatusEffectMap();
-  
+  auto lut = ActionLut::getEntry( action.getId() );
 
-  for (auto it = statusEffectMap.begin(); it != statusEffectMap.end(); it++) {
-    auto status = it->second;
-    auto statusSrc = status->getSrcActor();
-    if( statusSrc == nullptr ) continue;
-
-    if( statusSrc == playerAsChara )
-    {
-      if (status->getId() == VenomousBite)
-      {
-        status->resetStartTime();
-        action.resnapshotStatusEffect( status );
-        targetAsChara->sendStatusEffectUpdate();
-      }
-
-      if( status->getId() == Windbite )
-      {
-        status->resetStartTime();
-        action.resnapshotStatusEffect( status );
-        playerAsChara->sendStatusEffectUpdate();
-      }
-    }
-  }
-}
-
+  player.removeSingleStatusEffectById( 128 );
+  auto dmg = action.calcDamage( lut.potency );
+  pActionBuilder->damage( player.getAsChara(), targetAsChara, dmg.first, dmg.second );
+  dmg = action.calcDamage( lut.potency );
+  pActionBuilder->damage( player.getAsChara(), targetAsChara, dmg.first, dmg.second );
 }

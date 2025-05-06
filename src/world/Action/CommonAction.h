@@ -16,6 +16,11 @@ namespace Sapphire::World::Action
     ButchersBlock = 47,
 
     // Bard
+    HeavyShot = 97,
+    StraightShot = 98,
+    VenomousBite = 100,
+    Windbite = 113,
+    EmpyrealArrow = 3558,
     IronJaws = 3560
   };
 
@@ -34,7 +39,8 @@ namespace Sapphire::World::Action
     Deliverance = 729,
 
     // Bard
-    VenomousBite = 124,
-    Windbite = 129,
+    VenomousBiteStatus = 124,
+    Barrage = 128,
+    WindbiteStatus = 129
   };
 }

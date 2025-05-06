@@ -35,7 +35,7 @@ public:
     pActionBuilder->heal( pTarget, pSource, dmg.first, Common::CalcResultType::TypeRecoverHp, Common::ActionResultFlag::EffectOnSource );
 
     pActionBuilder->applyStatusEffectSelf( InnerBeast, 15000, 0, { StatusModifier{ Common::ParamModifier::DamageTakenPercent, -20 } } );
-    
+
     if( !pPlayer->hasStatusEffect( Unchained ) )
     {
       if( auto status = pPlayer->getStatusEffectById( Defiance ); status )
