@@ -110,8 +110,6 @@ namespace Sapphire::Entity
 
     std::map< uint8_t, StatusEffect::StatusEffectPtr >::iterator removeStatusEffect( uint8_t effectSlotId, bool sendOrder = true );
 
-    void updateStatusEffect( Sapphire::StatusEffect::StatusEffectPtr status );
-
     void replaceSingleStatusEffectById( uint32_t id );
 
     void removeSingleStatusEffectById( uint32_t id );

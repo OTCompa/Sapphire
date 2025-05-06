@@ -608,11 +608,6 @@ std::map< uint8_t, Sapphire::StatusEffect::StatusEffectPtr >::iterator Chara::re
   return it;
 }
 
-void Chara::updateStatusEffect(Sapphire::StatusEffect::StatusEffectPtr status) {
-  Network::Util::Packet::sendActorControl( getInRangePlayerIds( isPlayer() ), getId(), StatusEffectGain, status->getId() );
-  Network::Util::Packet::sendHudParam( *this );
-}
-
 std::map< uint8_t, StatusEffect::StatusEffectPtr > Chara::getStatusEffectMap() const
 {
   return m_statusEffectMap;
@@ -851,7 +846,7 @@ void Chara::onTick()
     {
       case Common::ParamModifier::TickDamage:
       {
-        thisTickDmg += Math::CalcStats::calcRandomizedDamage( effectIt.second->getBaseTickValue(), effectIt.second->getCritProbability(), effectIt.second->getCritBonus() );
+        thisTickDmg += Math::CalcStats::calcRandomizedDamage( thisEffect.second, effectIt.second->getCritProbability(), effectIt.second->getCritBonus() );
         break;
       }
 

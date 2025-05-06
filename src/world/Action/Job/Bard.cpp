@@ -42,24 +42,25 @@ void Bard::handleIronJaws( Entity::Player& player, Action& action )
   for (auto it = statusEffectMap.begin(); it != statusEffectMap.end(); it++) {
     auto status = it->second;
     auto statusSrc = status->getSrcActor();
+    if( statusSrc == nullptr ) continue;
 
-    if (status->getId() == VenomousBite) {
-      if( statusSrc == playerAsChara )
-      {
-        status->resetStartTime();
-        action.resnapshotStatusEffect( status );
-        targetAsChara->updateStatusEffect(status);
-      }
-    }
-
-    if( status->getId() == Windbite )
+    if( statusSrc == playerAsChara )
     {
-      if( statusSrc == playerAsChara )
+      if (status->getId() == VenomousBite)
       {
         status->resetStartTime();
         action.resnapshotStatusEffect( status );
-        targetAsChara->updateStatusEffect( status );
+        targetAsChara->sendStatusEffectUpdate();
+      }
+
+      if( status->getId() == Windbite )
+      {
+        status->resetStartTime();
+        action.resnapshotStatusEffect( status );
+        playerAsChara->sendStatusEffectUpdate();
       }
     }
   }
+}
+
 }

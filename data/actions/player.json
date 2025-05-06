@@ -1835,7 +1835,7 @@
           "modifiers": [
             {
               "modifier": "TickDamage",
-              "value": 40
+              "value": 50
             }
           ]
         }]

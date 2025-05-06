@@ -5,7 +5,6 @@
 
 #include <algorithm>
 #include <Service.h>
-
 #include "Manager/PlayerMgr.h"
 
 #include "Actor/Chara.h"
@@ -156,10 +155,10 @@ void Sapphire::StatusEffect::StatusEffect::applyStatus()
   {
     if( mod.modifier != Common::ParamModifier::TickDamage && mod.modifier != Common::ParamModifier::TickHeal )
       setModifier( mod.modifier, mod.value );
-    else if( mod.modifier == Common::ParamModifier::TickDamage )
-      registerTickEffect( mod.modifier, mod.value );
-    else if( mod.modifier == Common::ParamModifier::TickHeal )
-      registerTickEffect( mod.modifier, mod.value );
+    //else if( mod.modifier == Common::ParamModifier::TickDamage )
+    //  registerTickEffect( mod.modifier, mod.value );
+    //else if( mod.modifier == Common::ParamModifier::TickHeal )
+    //  registerTickEffect( mod.modifier, mod.value );
   }
 
   m_targetActor->calculateStats();
@@ -268,11 +267,3 @@ void Sapphire::StatusEffect::StatusEffect::setCritBonus( float critBonus)
   m_critBonus = critBonus;
 }
 
-float Sapphire::StatusEffect::StatusEffect::getBaseTickValue()
-{
-  return m_baseTickValue;
-}
-
-void Sapphire::StatusEffect::StatusEffect::setBaseTickValue(float baseTickValue) {
-  m_baseTickValue = baseTickValue;
-}

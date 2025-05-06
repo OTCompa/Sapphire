@@ -511,14 +511,14 @@ float Action::Action::calcTickDamage( uint32_t potency )
 
 void Action::Action::resnapshotStatusEffect( Sapphire::StatusEffect::StatusEffectPtr status )
 {
-  Logger::debug( "huh" );
+  auto statusModifiers = status->getStatusModifiers();
   auto tickEffect = status->getTickEffect();
-  if (tickEffect.first == ParamModifier::TickDamage) {
-    status->setBaseTickValue( calcTickDamage( tickEffect.second ) );
-  }
-  else if( tickEffect.first == ParamModifier::TickHeal )
+  for( const auto& [ modifier, val ] : statusModifiers )
   {
-    //status->setBaseTickValue(  );
+    if( modifier == ParamModifier::TickDamage )
+      status->registerTickEffect( tickEffect.first, calcTickDamage( val ) );
+    //else if(modifier == ParamModifier::TickHeal)
+      //status->registerTickEffect( tickEffect.first,  );
   }
 
   auto critProbability = Math::CalcStats::criticalHitProbability( *m_pSource );
@@ -679,20 +679,18 @@ void Action::Action::handleStatusEffects()
     {
       for( auto& status : m_lutEntry.statuses.target )
       {
-        float baseTickDamage = -1;
+        float tickValue = -1;
 
         auto modifiers = status.modifiers;
         for( auto& mod : modifiers )
         {
-          std::string format = "modifier {}: {}";
           if (mod.modifier == Common::ParamModifier::TickDamage) {
-            baseTickDamage = calcTickDamage( mod.value );
+            tickValue = calcTickDamage( mod.value );
           }
           else if( mod.modifier == Common::ParamModifier::TickHeal )
-            mod.value = calcHealing( mod.value ).first;
+            tickValue = calcHealing( mod.value ).first;
         }
-
-        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( modifiers ), status.flag, true, baseTickDamage);
+        pActionBuilder->applyStatusEffect( actor, status.id, status.duration, 0, std::move( modifiers ), status.flag, true, tickValue);
       }
 
       if( !actor->getStatusEffectMap().empty() )

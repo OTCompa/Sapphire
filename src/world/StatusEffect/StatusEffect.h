@@ -71,8 +71,6 @@ public:
 
   void setSlot( uint8_t slot );
 
-  void setCritStats( Entity::CharaPtr sourceActor );
-
   float getCritProbability();
 
   void setCritProbability( float critProbability );
@@ -80,10 +78,6 @@ public:
   float getCritBonus();
 
   void setCritBonus( float critBonus );
-
-  float getBaseTickValue();
-
-  void setBaseTickValue( float baseTickValue );
 
 private:
   uint32_t m_id;
@@ -102,7 +96,6 @@ private:
   uint8_t m_slot;
   float m_critProbability;
   float m_critBonus;
-  float m_baseTickValue;
 };
 
 }
