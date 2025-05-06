@@ -906,7 +906,17 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 100,
+          "duration": 18000,
+          "modifiers": [
+            {
+              "modifier": "CriticalHitPercent",
+              "value": 10
+            }
+          ]
+        }],
       "target": []
     }
   },
@@ -1316,7 +1326,21 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 117,
+          "duration": 18000,
+          "modifiers": [
+            {
+              "modifier": "DamageDealtPercent",
+              "value": 10
+            },
+            {
+              "modifier": "DamageTakenPercent",
+              "value": 10
+            }
+          ]
+        }],
       "target": []
     }
   },
@@ -1513,7 +1537,16 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [{
+        "id": 130,
+        "duration": 20000,
+        "modifiers": [
+          {
+            "modifier": "CriticalHitPercent",
+            "value": 10
+          }
+        ]
+      }],
       "target": []
     }
   },
@@ -1528,7 +1561,21 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 123,
+          "duration": 20000,
+          "modiifers": [
+            {
+              "modifier": "AccuracyPercent",
+              "value": 100
+            },
+            {
+              "modifier": "DexterityPercent",
+              "value": 15
+            }
+          ]
+        }],
       "target": []
     }
   },
@@ -1544,7 +1591,18 @@
     "nextCombo": [],
     "statuses": {
       "caster": [],
-      "target": []
+      "target": [
+        {
+          "id": 124,
+          "duration": 18000,
+          "modifiers": [
+            {
+              "modifier": "TickDamage",
+              "value": 40
+            }
+          ]
+        }
+      ]
     }
   },
   "101": {
@@ -1558,7 +1616,18 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 125,
+          "duration": 20000,
+          "modifiers": [
+            {
+              "modifier": "DamageDealtPercent",
+              "value": 20
+            }
+          ]
+        }
+      ],
       "target": []
     }
   },
@@ -1603,7 +1672,11 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 127,
+          "duration": 15
+        }],
       "target": []
     }
   },
@@ -1618,7 +1691,11 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 133,
+          "duration": 0
+        }],
       "target": []
     }
   },
@@ -1648,7 +1725,11 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 128,
+          "duration": 10000
+        }],
       "target": []
     }
   },
@@ -1663,7 +1744,11 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 13,
+          "duration": 10000
+        }],
       "target": []
     }
   },
@@ -1679,7 +1764,11 @@
     "nextCombo": [],
     "statuses": {
       "caster": [],
-      "target": []
+      "target": [
+        {
+          "id": 7,
+          "duration": 1000
+        }]
     }
   },
   "110": {
@@ -1739,7 +1828,17 @@
     "nextCombo": [],
     "statuses": {
       "caster": [],
-      "target": []
+      "target": [
+        {
+          "id": 129,
+          "duration": 18000,
+          "modifiers": [
+            {
+              "modifier": "TickDamage",
+              "value": 40
+            }
+          ]
+        }]
     }
   },
   "114": {
@@ -1753,7 +1852,17 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 135,
+          "duration": 0,
+          "modifiers": [
+            {
+              "modifier": "DamageDealtPercent",
+              "value": -10
+            }
+          ]
+        }],
       "target": []
     }
   },
@@ -1768,8 +1877,22 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
-      "target": []
+      "caster": [
+        {
+          "id": 139,
+          "duration": 18000
+        }],
+      "target": [
+        {
+          "id": 140,
+          "duration": 18000,
+          "modifiers": [
+            {
+              "modifier": "MagicDamagePercent",
+              "value": 10
+            }
+          ]
+        }]
     }
   },
   "116": {
@@ -1783,7 +1906,17 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 137,
+          "duration": 0,
+          "modifiers": [
+            {
+              "modifier": "DamageDealtPercent",
+              "value": -10
+            }
+          ]
+        }],
       "target": []
     }
   },
@@ -1799,7 +1932,17 @@
     "nextCombo": [],
     "statuses": {
       "caster": [],
-      "target": []
+      "target": [
+        {
+          "id": 247,
+          "duration": 20000,
+          "modifiers": [
+            {
+              "modifier": "EvasionPercent",
+              "value": -10
+            }
+          ]
+        }]
     }
   },
   "118": {
@@ -1813,7 +1956,11 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+        {
+          "id": 141,
+          "duration": 30000
+        }],
       "target": []
     }
   },
@@ -44781,7 +44928,25 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+      {
+        "id": 729,
+        "duration": 0,
+        "modifiers": [
+          {
+            "modifier": "DamageDealtPercent",
+            "value": 5
+          },
+          {
+            "modifier": "HealingMagicRecoveryPercent",
+            "value": 20
+          },
+          {
+            "modifier": "AccuracyPercent",
+            "value": 5
+          }
+        ]
+      }],
       "target": []
     }
   },
@@ -44946,7 +45111,16 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [{
+        "id": 865,
+        "duration": 0,
+        "modifiers": [
+          {
+            "modifier": "DamageDealtPercent",
+            "value": 30
+          }
+        ]
+      }],
       "target": []
     }
   },
@@ -44977,7 +45151,11 @@
     "nextCombo": [],
     "statuses": {
       "caster": [],
-      "target": []
+      "target": [
+        {
+          "id": 866,
+          "duration": 30000
+        }]
     }
   },
   "3562": {
