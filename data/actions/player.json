@@ -44931,7 +44931,17 @@
     "restorePercentage": 0,
     "nextCombo": [],
     "statuses": {
-      "caster": [],
+      "caster": [
+      {
+        "id": 729,
+        "duration": 0,
+        "modifiers": [
+          {
+            "modifier": "DamageDealtPercent",
+            "value": 5
+          }
+        ]
+      }],
       "target": []
     }
   },
