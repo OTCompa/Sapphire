@@ -27,8 +27,10 @@ void Warrior::onAction( Entity::Player& player, Action& action )
     case StormsPath:
     case SkullSunder:
     case ButchersBlock:
+    case Vengeance:
+    case Berserk:
     {
-      if( action.isComboAction() && !action.isCorrectCombo() )
+      if( action.isComboAction() && !action.isCorrectCombo() && !action.isAbility() )
         break;
 
       if( player.hasStatusEffect( Defiance ) )

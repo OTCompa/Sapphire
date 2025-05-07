@@ -10,7 +10,9 @@ namespace Sapphire::World::Action
   {
     SkullSunder = 35,
     Maim = 37,
+    Berserk = 38,
     StormsPath = 42,
+    Vengeance = 44,
     StormsEye = 45,
     ButchersBlock = 47
   };
