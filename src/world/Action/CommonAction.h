@@ -25,6 +25,11 @@ namespace Sapphire::World::Action
     WrathIV = 96,
     Infuriated = 97,
     InnerBeast = 411,
-    Deliverance = 729
+    Deliverance = 729,
+    Abandon = 730,
+    AbandonII = 731,
+    AbandonIII = 732,
+    AbandonIV = 733,
+    Uncontrollable = 734,
   };
 }

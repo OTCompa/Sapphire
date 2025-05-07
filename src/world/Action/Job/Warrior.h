@@ -15,6 +15,6 @@ namespace Sapphire::World::Action
       static void onAction( Entity::Player& player, Action& action );
 
     private:
-      static void handleWrath( Entity::Player& player, Action& action );
+      static void handleWrathAbandon( Entity::Player& player, Action& action, char isInDefiance );
   };
 }
