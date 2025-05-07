@@ -778,6 +778,14 @@ bool Action::Action::playerPreCheck( Entity::Player& player )
   return true;
 }
 
+void Action::Action::actionConditionInit(Entity::Player& player) {
+  switch (player.getClass())
+  {
+    case ClassJob::Bard:
+      Bard::conditionInit( player, *this );
+  }
+}
+
 uint32_t Action::Action::getAdditionalData() const
 {
   return m_additionalData;

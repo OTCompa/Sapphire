@@ -26,10 +26,12 @@ public:
     if( !pActionBuilder ) return;
     if( targetAsChara == nullptr ) return;
 
+    action.enableGenericHandler();
+
     auto statusEffectMap = targetAsChara->getStatusEffectMap();
 
-    auto dmg = action.calcDamage( Potency );
-    pActionBuilder->damage( playerAsChara, targetAsChara, dmg.first, dmg.second );
+    //auto dmg = action.calcDamage( Potency );
+    //pActionBuilder->damage( playerAsChara, targetAsChara, dmg.first, dmg.second );
 
     for( auto it = statusEffectMap.begin(); it != statusEffectMap.end(); it++ )
     {

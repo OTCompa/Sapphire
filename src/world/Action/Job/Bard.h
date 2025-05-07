@@ -12,6 +12,7 @@ namespace Sapphire::World::Action
   class Bard
   {
   public:
+    static void conditionInit( Entity::Player& player, Action& action );
     static void onAction( Entity::Player& player, Action& action );
 
   private:

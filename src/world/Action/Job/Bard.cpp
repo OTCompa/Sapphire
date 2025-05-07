@@ -12,6 +12,23 @@ using namespace Sapphire;
 using namespace Sapphire::Common;
 using namespace Sapphire::World::Action;
 
+void Bard::conditionInit(Entity::Player& player, Action& action )
+{
+  auto src = player.getAsChara();
+  if( src->hasStatusEffect( 865 ) )
+    switch( action.getId() )
+    {
+      case HeavyShot:
+      case StraightShot:
+      case VenomousBite:
+      case Windbite:
+      case EmpyrealArrow:
+      case IronJaws:
+        action.setCastTime( Math::CalcStats::gcdSpeed( *src, 1500 ) );
+        break;
+    }
+}
+
 void Bard::onAction( Entity::Player& player, Action& action )
 {
     switch (action.getId())

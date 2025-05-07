@@ -482,6 +482,29 @@ float CalcStats::speed( const Sapphire::Entity::Chara& chara )
   return std::floor( 130.f * ( speedVal - subVal ) / divVal + 1000.f ) / 1000.f;
 }
 
+uint32_t CalcStats::gcdSpeed( const Sapphire::Entity::Chara& chara, uint32_t baseGcd )
+{
+  auto level = chara.getLevel();
+
+  auto subVal = static_cast< float >( levelTable[ level ][ Common::LevelTableEntry::SUB ] );
+  auto divVal = static_cast< float >( levelTable[ level ][ Common::LevelTableEntry::DIV ] );
+
+  // check whether we use spellspeed or skillspeed
+  uint32_t speedVal = 0;
+  switch( chara.getPrimaryStat() )
+  {
+    case Common::BaseParam::Intelligence:
+    case Common::BaseParam::Mind:
+      speedVal = chara.getStatValue( Common::BaseParam::SpellSpeed );
+      break;
+
+    default:
+      speedVal = chara.getStatValue( Common::BaseParam::SkillSpeed );
+  }
+
+  return floor(baseGcd * (1000 + ceil(130 * (subVal - speedVal) / divVal)) / 1000);
+}
+
 float CalcStats::criticalHitBonus( const Sapphire::Entity::Chara& chara )
 {
   auto level = chara.getLevel();

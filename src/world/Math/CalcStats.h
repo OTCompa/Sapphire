@@ -94,6 +94,8 @@ namespace Sapphire::Math
      */
     static float speed( const Sapphire::Entity::Chara& chara );
 
+    static uint32_t gcdSpeed( const Sapphire::Entity::Chara& chara, uint32_t baseGcd );
+
     /*!
      * @brief Calculates the amount of bonus damaged applied on a critical hit
      * @note Called Critical Hit Rate in the TJ document but I think that name is a bit too ambiguous - f(CHR)

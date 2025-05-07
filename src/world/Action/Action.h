@@ -22,6 +22,7 @@ namespace Sapphire::World::Action
 
     virtual ~Action() = default;
 
+    void actionConditionInit( Entity::Player& player );
     uint32_t getId() const;
 
     uint32_t getResultId() const;

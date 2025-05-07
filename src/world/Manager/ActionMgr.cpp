@@ -131,6 +131,10 @@ void ActionMgr::bootstrapAction( Entity::Chara& src, Action::ActionPtr currentAc
   }
   */
 
+  if (src.isPlayer()) {
+    currentAction->actionConditionInit( *src.getAsPlayer() );
+  }
+
   if( src.getCurrentAction() )
   {
     if( src.isPlayer() )
