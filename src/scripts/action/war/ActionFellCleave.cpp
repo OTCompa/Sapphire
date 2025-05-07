@@ -19,12 +19,11 @@ public:
 
   void onExecute( Sapphire::World::Action::Action& action ) override
   {
-    auto pPlayer = action.getSourceChara()->getAsPlayer();
     auto pSource = action.getSourceChara();
     auto pTarget = action.getHitChara();
     auto pActionBuilder = action.getActionResultBuilder();
 
-    if( !pPlayer || !pActionBuilder )
+    if( !pSource || !pActionBuilder )
       return;
 
     // need to manually remove status 
