@@ -183,6 +183,11 @@ uint32_t Sapphire::StatusEffect::StatusEffect::getDuration() const
   return m_duration;
 }
 
+uint32_t Sapphire::StatusEffect::StatusEffect::getRemainingDuration() const
+{
+  return m_duration - ( Common::Util::getTimeMs() - m_startTime );
+}
+
 uint32_t Sapphire::StatusEffect::StatusEffect::getTickRate() const
 {
   return m_tickRate;

@@ -35,6 +35,8 @@ public:
 
   uint32_t getDuration() const;
 
+  uint32_t getRemainingDuration() const;
+
   uint32_t getTickRate() const;
 
   uint32_t getSrcActorId() const;
