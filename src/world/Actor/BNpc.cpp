@@ -96,8 +96,6 @@ BNpc::BNpc( uint32_t id, std::shared_ptr< Common::BNPCInstanceObject > pInfo, co
   m_flags = 0;
   m_rank = pInfo->BNPCRankId;
 
-
-
   // Striking Dummy
   if( pInfo->NameId == 541 )
     m_invincibilityType = Common::InvincibilityRefill;
@@ -281,6 +279,80 @@ BNpc::BNpc( uint32_t id, std::shared_ptr< Common::BNPCInstanceObject > pInfo, co
 
   // todo: is this actually good?
   m_naviTargetReachedDistance = m_radius;
+
+  calculateStats();
+}
+
+  BNpc::BNpc( uint32_t id, BNpcTemplatePtr pTemplate, float posX, float posY, float posZ, float rot,
+            uint8_t level, uint32_t maxHp, TerritoryPtr pZone ) : Npc( ObjKind::BattleNpc )
+{
+  m_id = id;
+  m_modelChara = pTemplate->getModelChara();
+  m_displayFlags = pTemplate->getDisplayFlags();
+  m_pose = pTemplate->getPose();
+  m_aggressionMode = pTemplate->getAggressionMode();
+  m_weaponMain = pTemplate->getWeaponMain();
+  m_weaponSub = pTemplate->getWeaponSub();
+  m_bNpcNameId = pTemplate->getBNpcNameId();
+  m_bNpcBaseId = pTemplate->getBNpcBaseId();
+  m_enemyType = pTemplate->getEnemyType();
+  m_pos.x = posX;
+  m_pos.y = posY;
+  m_pos.z = posZ;
+  m_rot = rot;
+  m_level = level;
+  m_invincibilityType = InvincibilityNone;
+  m_currentStance = Common::Stance::Passive;
+  m_levelId = 0;
+  m_flags = 0;
+
+  m_class = ClassJob::Adventurer;
+
+  //m_pCurrentTerritory = std::move( pZone );
+  m_territoryTypeId = pZone->getTerritoryTypeId();
+  m_territoryId = pZone->getGuId();
+
+  m_spawnPos = m_pos;
+
+  m_timeOfDeath = 0;
+  m_targetId = Common::INVALID_GAME_OBJECT_ID64;
+
+  m_maxHp = maxHp;
+  m_maxMp = 200;
+  m_hp = maxHp;
+  m_mp = 200;
+
+  m_state = BNpcState::Idle;
+  m_status = ActorStatus::Idle;
+
+  m_fsm = AI::Fsm::make_StateMachine();
+  
+  // m_baseStats.max_hp = maxHp;
+  // m_baseStats.max_mp = 200;
+
+  memcpy( m_customize, pTemplate->getCustomize(), sizeof( m_customize ) );
+  memcpy( m_modelEquip, pTemplate->getModelEquip(), sizeof( m_modelEquip ) );
+
+  //auto& exdData = Common::Service< Data::ExdDataGenerated >::ref();
+
+  //auto bNpcBaseData = exdData.get< Data::BNpcBase >( m_bNpcBaseId );
+  //assert( bNpcBaseData );
+
+  //m_radius = bNpcBaseData->scale;
+
+  m_radius = 1;
+
+  //auto modelChara = exdData.get< Data::ModelChara >( bNpcBaseData->modelChara );
+  //if( modelChara )
+  //{
+  //  auto modelSkeleton = exdData.get< Data::ModelSkeleton >( modelChara->model );
+  //  if( modelSkeleton )
+  //    m_radius *= modelSkeleton->radius;
+  //}
+
+  // todo: is this actually good?
+  //m_naviTargetReachedDistance = m_scale * 2.f;
+  m_naviTargetReachedDistance = 4.f;
 
   calculateStats();
 }

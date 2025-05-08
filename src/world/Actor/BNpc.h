@@ -6,10 +6,10 @@
 #include "ForwardsZone.h"
 #include "Chara.h"
 #include "Npc.h"
+#include "BNpcTemplate.h"
 #include <set>
 #include <map>
 #include <queue>
-
 namespace Sapphire::Entity
 {
 
@@ -67,6 +67,8 @@ namespace Sapphire::Entity
 
     BNpc( uint32_t id, std::shared_ptr< Common::BNPCInstanceObject > pInfo, const Territory& zone );
     BNpc( uint32_t id, std::shared_ptr< Common::BNPCInstanceObject > pInfo, const Territory& zone, uint32_t hp, Common::BNpcType type );
+    BNpc( uint32_t id, BNpcTemplatePtr pTemplate, float posX, float posY, float posZ, float rot,
+          uint8_t level, uint32_t maxHp, TerritoryPtr pZone );
 
     virtual ~BNpc() override;
 
