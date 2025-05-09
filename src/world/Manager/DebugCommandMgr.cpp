@@ -449,8 +449,17 @@ void DebugCommandMgr::add( char* data, Entity::Player& player, std::shared_ptr< 
                                               uint8_t aggressionMode, uint8_t enemyType, uint8_t onlineStatus, uint8_t pose,
                                               uint16_t modelChara, uint32_t displayFlags, uint32_t* modelEquip,
                                               uint8_t* customize )*/
-    auto bNpcTemplate = Sapphire::Entity::make_BNpcTemplate( 1, 49, 49, 0, 0, 1, 4, 0, 4, 57, 0, nullptr, nullptr );
-
+    uint32_t baseId;
+    uint32_t nameId;
+    uint32_t enemyType;
+    uint32_t modelChara;
+    uint32_t flags;
+    sscanf( params.c_str(), "%u %u %u %u %u", &baseId, &nameId, &enemyType, &modelChara, &flags );
+    Logger::debug( "Spawning bnpc:\n\tbaseId: {}\n\tnameId: {}\n\tenemyType: {}\n\tmodelChara: {}\n\tflags: {}", baseId, nameId, enemyType, modelChara, flags );
+    //auto bNpcTemplate = Sapphire::Entity::make_BNpcTemplate( 1, 49, 49, 0, 0, 0, 4, 0, 4, 57, 0, nullptr, nullptr );
+    //auto bNpcTemplate = Sapphire::Entity::make_BNpcTemplate( 1, 1993, 49, 0, 0, 0, 4, 0, 4, 517, 0, nullptr, nullptr );
+    auto bNpcTemplate = Sapphire::Entity::make_BNpcTemplate( 1, baseId, nameId, 0, 0, 0, enemyType, 0, 4, modelChara, 0, nullptr, nullptr );
+    
     auto& teriMgr = Common::Service< World::Manager::TerritoryMgr >::ref();
     auto playerZone = teriMgr.getTerritoryByGuId(player.getTerritoryId());
     auto pBNpc = std::make_shared< Entity::BNpc >( playerZone->getNextActorId(),
@@ -465,6 +474,11 @@ void DebugCommandMgr::add( char* data, Entity::Player& player, std::shared_ptr< 
     pBNpc->setTerritoryTypeId( playerZone->getTerritoryTypeId() );
     //pBNpc->setCurrentZone( playerZone );
     //pBNpc->setPos( player.getPos().x, player.getPos().y, player.getPos().z );
+    pBNpc->setFlag( flags );
+    if( pBNpc->hasFlag( Entity::BNpcFlag::Invincible ) )
+    {
+      pBNpc->setInvincibilityType( Common::InvincibilityRefill );
+    }
     playerZone->pushActor( pBNpc );
   }
   else if( subCommand == "actrl" )
