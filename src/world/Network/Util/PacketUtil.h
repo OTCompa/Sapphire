@@ -12,7 +12,8 @@ namespace Sapphire::Network::Util::Packet
   void sendBaseParams( Entity::Player& player );
   void sendHudParam( Entity::Chara& player );
   void sendStatusUpdate( Entity::Player& player );
-
+  void sendCreateAreaObject( Entity::Player& player, uint8_t index, uint32_t baseId, uint32_t entityId, uint32_t ownerId, float scale, uint16_t sharedGroupTimelineState, uint8_t args, uint32_t args2, uint32_t args3, Common::FFXIVARR_POSITION3 pos );
+  void Util::Packet::sendDeleteAreaObject( const std::set< uint64_t >& characterIds, uint8_t index );
   void sendHuntingLog( Entity::Player& player );
   void sendTitleList( Entity::Player& player );
 

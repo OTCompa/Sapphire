@@ -77,6 +77,40 @@ void Util::Packet::sendHudParam( Entity::Chara& source )
     server().queueForPlayers( source.getInRangePlayerIds( false ), makeHudParam( source ) );
 }
 
+
+void Util::Packet::sendCreateAreaObject(Entity::Player& player, uint8_t index, uint32_t baseId, uint32_t entityId, uint32_t ownerId, float scale, uint16_t sharedGroupTimelineState, uint8_t args, uint32_t args2, uint32_t args3, Common::FFXIVARR_POSITION3 pos)
+{
+  auto test = makeZonePacket< FFXIVIpcCreateObject >( player.getId() );
+  test->data().Index = index;
+  test->data().Kind = 0x0B;
+  test->data().Flag = 0;
+  test->data().BaseId = baseId;
+  test->data().EntityId = entityId;
+  test->data().LayoutId = 0;
+  test->data().ContentId = 0;
+  test->data().OwnerId = ownerId;
+  test->data().Scale = scale;
+  test->data().SharedGroupTimelineState = sharedGroupTimelineState;
+  test->data().Dir = 0x7FFF;
+  test->data().FATE = 0;
+  test->data().PermissionInvisibility = 0;
+  test->data().Args = args;
+  test->data().Args2 = args2;
+  test->data().Args3 = args3;
+  test->data().Pos = pos;
+
+  server().queueForPlayers( player.getInRangePlayerIds( true ), test );
+}
+
+void Util::Packet::sendDeleteAreaObject(const std::set< uint64_t >& characterIds, uint8_t index )
+{
+  auto test = makeZonePacket< FFXIVIpcDeleteObject >( player.getId() );
+  test->data().Index = index;
+
+  server().queueForPlayers( characterIds, test );
+}
+
+
 void Util::Packet::sendStatusUpdate( Entity::Player& player )
 {
   auto playerStatusUpdate = makeZonePacket< FFXIVIpcPlayerStatusUpdate >( player.getId() );
